@@ -17,10 +17,10 @@ class User{
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function create($firstName, $lastName, $email, $password){
+    public function create($firstName, $lastName, $email, $phone, $password){
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?,?,?,?)");
-        return $stmt->execute([$firstName, $lastName, $email, $hashedPassword]);
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, email, phone, password) VALUES (?,?,?,?,?)");
+        return $stmt->execute([$firstName, $lastName, $email, $phone, $hashedPassword]);
     }
     public function findById($id)
     {
@@ -28,10 +28,10 @@ class User{
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function update($id, $firstName, $lastName, $email)
+    public function update($id, $firstName, $lastName, $email, $phone)
     {
-        $stmt = $this->db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE id = ?");
-        return $stmt->execute([$firstName, $lastName, $email, $id]);
+        $stmt = $this->db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, phone = ? WHERE id = ?");
+        return $stmt->execute([$firstName, $lastName, $email, $phone, $id]);
     }
     public function deleteById($id){
         $stmt = $this->db->prepare("DELETE FROM users WHERE id= ?");

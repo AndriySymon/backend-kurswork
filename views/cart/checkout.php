@@ -13,6 +13,10 @@
         <label>Email:</label>
         <input type="email" name="email" class="form-control" required>
     </div>
+    <div class="mb-3">
+        <label>Номер телефону отримувача:</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
     <div class="mb-3">
         <label>Місто:</label>
         <input type="text" name="city" class="form-control" required>

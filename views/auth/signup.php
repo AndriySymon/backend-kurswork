@@ -12,6 +12,10 @@
         <input type="email" name="email" class="form-control" required>
     </div>
     <div class="mb-3">
+        <label for="email">Номер телефону</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+    <div class="mb-3">
         <label for="password">Пароль</label>
         <input type="password" name="password" class="form-control" required>
     </div>

@@ -41,25 +41,36 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="col-md-6">
             <h2><?= htmlspecialchars($instrument['name']) ?></h2>
             <p><?= nl2br(htmlspecialchars($instrument['text'])) ?></p>
-            <?php if (!empty($attributes)): ?>
-            <h4 class="mt-4">Характеристики</h4>
-            <table class = "table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Назва</th>
-                        <th>Значення</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($attributes as $attr): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($attr['attribute_name']) ?></td>
-                            <td><?= htmlspecialchars($attr['attribute_value']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+
+            <h4 class="mt-4">Характеристики</h4>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                <a href="/adminattribute/add/<?= $instrument['id'] ?>" class="btn btn-success mb-2">Додати атрибут</a>
             <?php endif; ?>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Назва</th>
+                        <th>Значення</th>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                            <th>Дії</th>
+                        <?php endif; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($attributes as $attr): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($attr['attribute_name']) ?></td>
+                            <td><?= htmlspecialchars($attr['attribute_value']) ?></td>
+                            <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                                <td>
+                                    <a href="/adminattribute/edit/<?= $attr['id'] ?>" class="btn btn-primary btn-sm">Редагувати</a>
+                                    <a href="/adminattribute/delete/<?= $attr['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Ви впевнені, що хочете видалити цей атрибут?')">Видалити</a>
+                                </td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
             <h4 class="mt-4">Ціна</h4>
             <p class="fs-4 fw-bold text-success"><?= number_format($instrument['price'], 2, '.', ' ') ?> грн</p>
             <?php if(isset($_SESSION['user'])): ?>

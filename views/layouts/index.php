@@ -31,17 +31,17 @@ if (empty($Title))
                             <li><a href="/instruments/index" class="nav-link px-2 text-white">Інструменти</a></li> 
                             <li><a href="/site/about" class="nav-link px-2 text-white">Про нас</a></li> 
                         </ul> 
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"> 
-                            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search"> 
-                        </form> 
                         <div class="text-end"> 
                         <?php if (!isset($_SESSION['user'])): ?>
                             <a href="/auth/login" class="btn btn-outline-light me-2">Увійти</a>
                             <a href="/auth/signup" class="btn btn-warning">Зареєструватись</a>
                         <?php else: ?>
-                            <a href="/account/profile" class="btn btn-info">Акаунт</a>
-                            <a href="/cart/index" class="btn btn-primary">Кошик</a>
-                            <a href="/auth/logout" class="btn btn-danger">Вийти</a> 
+                        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                        <a href="/admininstrument/add" class="btn btn-success me-2">Додати інструмент</a>
+                        <?php endif; ?>
+                        <a href="/account/profile" class="btn btn-info">Акаунт</a>
+                        <a href="/cart/index" class="btn btn-primary">Кошик</a>
+                        <a href="/auth/logout" class="btn btn-danger">Вийти</a>  
                         <?php endif; ?>
                         </div>
                 </div> 

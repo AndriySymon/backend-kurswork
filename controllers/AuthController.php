@@ -11,10 +11,11 @@ class AuthController extends Controller {
         $firstName = trim($_POST['first_name'] ?? '');
         $lastName = trim($_POST['last_name'] ?? '');
         $email = trim($_POST['email'] ?? '');
+        $phone = trim($_POST['phone'] ?? '');
         $password = $_POST['password'] ?? '';
         $passwordConfirm = $_POST['password_confirm'] ?? '';
 
-        if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($passwordConfirm)) {
+        if (empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password) || empty($passwordConfirm)) {
             $error = "Будь ласка, заповніть усі поля.";
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = "Некоректна електронна пошта.";
@@ -27,11 +28,9 @@ class AuthController extends Controller {
         if (!$error) {
             $db = DB::getConnection();
             $userModel = new \models\User();
-            $stmt = $db->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             try {
-                $userModel->create($firstName, $lastName, $email, $password);
+                $userModel->create($firstName, $lastName, $email, $phone, $password);
 
                 $user = $userModel->findByEmail($email);
 
@@ -79,6 +78,7 @@ class AuthController extends Controller {
                     'email' => $user['email'],
                     'first_name' => $user['first_name'],
                     'last_name' => $user['last_name'],
+                    'phone' => $user['phone'],
                     'role' => $user['role'],
                 ];
                 $_SESSION['flash'] = 'Ви успішно увійшли!';

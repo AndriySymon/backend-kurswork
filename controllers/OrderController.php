@@ -76,7 +76,8 @@ class OrderController extends Controller{
             require_once 'vendor/autoload.php';
             $mailer = new \services\MailService();
             $fullName = $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'];
-            $mailer->sendCancelOrderEmail($orderId, $_SESSION['user']['email'], $fullName);
+            $userPhone = $_SESSION['user']['phone'];
+            $mailer->sendCancelOrderEmail($orderId, $_SESSION['user']['email'], $fullName, $userPhone);
         }
 
         header("Location: /order/myOrders");

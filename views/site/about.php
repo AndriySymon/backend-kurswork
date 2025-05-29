@@ -1,5 +1,5 @@
-<div class="container my-5">
-    <div class="row mb-4">
+<div class="container my-5 text-center">
+    <div class="row mb-4 justify-content-center align-items-center">
         <div class="col-md-6">
             <h2>Про наш магазин</h2>
             <p>Ми — команда ентузіастів музики, яка понад 10 років допомагає людям знайти ідеальний інструмент. Наш інтернет-магазин пропонує широкий асортимент товарів: від класичних акустичних гітар до професійних синтезаторів та ударних установок.</p>
@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-4 justify-content-center">
         <div class="col-md-4">
             <h5>Контактна інформація</h5>
             <ul class="list-unstyled">
@@ -30,10 +30,10 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <h5>Чому обирають нас?</h5>
-            <ul>
+            <ul class="list-unstyled">
                 <li>Широкий асортимент якісних інструментів</li>
                 <li>Гарантія на всі товари</li>
                 <li>Доступна ціна та акції</li>

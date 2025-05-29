@@ -17,6 +17,10 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
         </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Номер телефону</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
+        </div>
         <button type="submit" class="btn btn-primary">Зберегти зміни</button>
         <a href="/" class="btn btn-secondary">Назад</a>
     </form>

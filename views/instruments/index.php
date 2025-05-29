@@ -19,6 +19,13 @@ $instruments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h5 class="mt-4">Ціна</h4>
             <p class="fs-4 fw-bold text-success"><?= number_format($instrument['price'], 2, '.', ' ') ?> грн</p>
             <a href="/instruments/view/<?= $instrument['id'] ?>" class="btn btn-primary">Детальніше</a>
+
+            <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+          <div class="d-flex gap-2">
+            <a href="/admininstrument/edit/<?= $instrument['id'] ?>" class="btn btn-warning btn-sm">Редагувати</a>
+            <a href="/admininstrument/delete/<?= $instrument['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Ви впевнені, що хочете видалити цей інструмент?')">Видалити</a>
+          </div>
+        <?php endif; ?>
           </div>
         </div>
       </div>

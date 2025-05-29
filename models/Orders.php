@@ -11,7 +11,7 @@ class Orders{
     public function __construct() {
         $this->db = DB::getConnection();
     }
-    public function createOrder($userId, $totalPrice, $address, $city, $postalCode){
+    public function createOrder($userId, $totalPrice, $address, $city){
 
         $stmt = $this->db->prepare("
             INSERT INTO orders (user_id, total_price, address, city)

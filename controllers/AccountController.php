@@ -22,18 +22,20 @@ class AccountController extends Controller{
             $firstName = trim($_POST['first_name'] ?? '');
             $lastName = trim($_POST['last_name'] ?? '');
             $email = trim($_POST['email'] ?? '');
+            $phone = trim($_POST['phone'] ?? '');
 
-            if (empty($firstName) || empty($lastName) || empty($email)) {
+            if (empty($firstName) || empty($lastName) || empty($email) || empty($phone)) {
                 $error = "Всі поля обов'язкові.";
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $error = "Невірний формат email.";
             } else {
-                $success = $userModel->update($userId, $firstName, $lastName, $email);
+                $success = $userModel->update($userId, $firstName, $lastName, $email, $phone);
 
                 if ($success){
                     $_SESSION['user']['first_name'] = $firstName;
                     $_SESSION['user']['last_name'] = $lastName;
                     $_SESSION['user']['email'] = $email;
+                    $_SESSION['user']['phone'] = $phone;
 
                     $_SESSION['flash'] = 'Дані оновлено!';
                     header('Location: /account/profile');

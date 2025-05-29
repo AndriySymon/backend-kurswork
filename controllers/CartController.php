@@ -108,6 +108,7 @@ class CartController extends Controller{
             $firstName = $_POST['first_name'];
             $lastName = $_POST['last_name'];
             $email = $_POST['email'];
+            $phone = $_POST['phone'];
             $city = $_POST['city'];
             $postOffice = $_POST['post_office'];
             $address = "Нова Пошта, відділення №{$postOffice}";
@@ -132,14 +133,14 @@ class CartController extends Controller{
                 }
             }
 
-            $orderId = $orderModel->createOrder($userId, $totalPrice, $address, $city, '');
+            $orderId = $orderModel->createOrder($userId, $totalPrice, $address, $city, '', $phone);
 
             foreach ($items as $item){
                 $orderModel->addOrderItem($orderId, $item['id'], $item['quantity'], $item['price']);
             }
             require_once 'vendor/autoload.php';
             $mailer = new MailService();
-            $mailer->sendOrderEmail($firstName, $lastName, $email, $city, $address, $items, $totalPrice);
+            $mailer->sendOrderEmail($firstName, $lastName, $email, $phone, $city, $address, $items, $totalPrice);
 
             unset($_SESSION['cart']);
 
@@ -147,6 +148,7 @@ class CartController extends Controller{
                 'first_name' => $firstName,
                 'last_name' => $lastName,
                 'email' => $email,
+                'phone' => $phone,
                 'address' => $address,
                 'city' => $city,
                 'items' => $items,

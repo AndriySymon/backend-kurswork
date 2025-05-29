@@ -25,9 +25,9 @@ class MailService{
         $this->mailer->setFrom('ipz235_sag@student.ztu.edu.ua', 'Симон Андрій');
         $this->mailer->addAddress('ipz235_sag@student.ztu.edu.ua');
     }
-    public function sendOrderEmail($firstName, $lastName, $email, $city, $address, $items, $totalPrice){
+    public function sendOrderEmail($firstName, $lastName, $email, $phone, $city, $address, $items, $totalPrice){
         $body = "Нове замовлення від {$firstName} {$lastName}\n";
-        $body .= "Email: {$email}\nМісто: {$city}\nАдреса: {$address}\n\n";
+        $body .= "Email: {$email}\nМісто: {$city}\nАдреса: {$address}\nНомер телефону: {$phone}\n\n";
         $body .= "Список товарів:\n";
 
         foreach($items as $item){
@@ -47,12 +47,13 @@ class MailService{
             return false;
         }
     }
-    public function sendCancelOrderEmail($orderId, $userEmail, $userName){
+    public function sendCancelOrderEmail($orderId, $userEmail, $userName, $userPhone){
         $this->mailer->Subject = "Скасування замовлення №{$orderId}";
         $body = "
             <h2>Замовлення скасоване</h2>
             <p><strong>Користувач: </strong> {$userName}</p>
             <p><strong>Email: </strong>{$userEmail}</p>
+            <p><strong>Номер телефону: </strong>{$userPhone}</p>
             <p><strong>Номер замовлення: </strong>{$orderId}</p>
             <p>Замовлення було скасоване користувачем.</p>
         ";
