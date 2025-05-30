@@ -28,7 +28,7 @@ if (empty($Title))
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> 
                             <li><a href="/" class="nav-link px-2 text-secondary">Головна</a></li> 
                             <li><a href="/index.php?route=category/allcategories" class="nav-link px-2 text-white">Категорії</a></li> 
-                            <li><a href="/instruments/index" class="nav-link px-2 text-white">Інструменти</a></li> 
+                            <li><a href="/instruments/index" class="nav-link px-2 text-white">Весь каталог</a></li> 
                             <li><a href="/site/about" class="nav-link px-2 text-white">Про нас</a></li> 
                         </ul> 
                         <div class="text-end"> 
@@ -39,8 +39,16 @@ if (empty($Title))
                         <?php if ($_SESSION['user']['role'] === 'admin'): ?>
                         <a href="/admininstrument/add" class="btn btn-success me-2">Додати інструмент</a>
                         <?php endif; ?>
+                        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                        <a href="/adminorder/index" class="btn btn-success me-2">Замовлення</a>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                        <a href="/admincategory/index" class="btn btn-success me-2">Редагування категорій</a>
+                        <?php endif; ?>
                         <a href="/account/profile" class="btn btn-info">Акаунт</a>
+                        <?php if ($_SESSION['user']['role'] === 'user'): ?>
                         <a href="/cart/index" class="btn btn-primary">Кошик</a>
+                        <?php endif; ?>
                         <a href="/auth/logout" class="btn btn-danger">Вийти</a>  
                         <?php endif; ?>
                         </div>
@@ -58,7 +66,7 @@ if (empty($Title))
     <footer class="py-3 my-4"> 
         <ul class="nav justify-content-center border-bottom pb-3 mb-3"> 
             <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Головна</a></li> 
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Категорії</a></li> 
+            <li class="nav-item"><a href="/index.php?route=category/allcategories" class="nav-link px-2 text-body-secondary">Категорії</a></li> 
             <li class="nav-item"><a href="/instruments/index" class="nav-link px-2 text-body-secondary">Інструменти</a></li> 
             <li class="nav-item"><a href="/site/about" class="nav-link px-2 text-body-secondary">Про нас</a></li> 
         </ul> 

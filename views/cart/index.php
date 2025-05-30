@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<h1>Ваш кошик</h1>
+<h1 class="text-center">Ваш кошик</h1>
 
 <?php if (empty($items)): ?>
-    <p>Кошик порожній.</p>
+    <p class="text-center">Кошик порожній.</p>
 <?php else: ?>
+    <div class="cart-container mx-auto p-4 border rounded" style="max-width: 700px;">
     <table class="table">
         <thead>
             <tr>
@@ -57,10 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td><?= htmlspecialchars($item['name']) ?></td>
                     <td><?= $item['price'] ?> грн</td>
                     <td>
+                        <div style="display: flex; align-items: center; gap: 5px; flex-wrap: nowrap;">
                         <button class="btn btn-sm btn-success cart-action" data-action="add" data-id="<?= $item['id'] ?>">+</button>
                         <span class="cart-quantity" data-id="<?= $item['id'] ?>"><?= $item['quantity'] ?></span>
                         <button class="btn btn-sm btn-warning cart-action" data-action="decrease" data-id="<?= $item['id'] ?>">−</button>
                         <button class="btn btn-sm btn-danger cart-action" data-action="remove" data-id="<?= $item['id'] ?>">Видалити товар з кошику</button>
+                        </div>
                     </td>
                     <td><?= $sum ?> грн</td>
                 </tr>
@@ -73,5 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </tr>
         </tfoot>
     </table>
+    <div class="text-center">
     <a href="/cart/checkout" class="btn btn-primary">Перейти до замовлення</a>
+    </div>
 <?php endif; ?>

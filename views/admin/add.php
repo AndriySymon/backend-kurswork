@@ -1,3 +1,16 @@
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fafafa;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+</style>
+
+<div class="form-container">
 <h1>Додати інструмент</h1>
 
 <?php if (!empty($error)): ?>
@@ -26,8 +39,17 @@
         <input type="text" name="image" class="form-control">
     </div>
     <div class="mb-3">
-        <label>ID Категорії</label>
-        <input type="number" name="category_id" class="form-control">
-    </div>
+        <label for="category_id">Категорія</label>
+        <select name="category_id" id="category_id" class="form-control" required>
+            <option value="">-- Виберіть категорію --</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= $category['id'] ?>"
+                    <?= (isset($old['category_id']) && $old['category_id'] == $category['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($category['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <button type="submit" class="btn btn-success">Додати</button>
 </form>
+</div>

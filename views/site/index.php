@@ -17,7 +17,7 @@ ob_start();
   <div class="row">
     <div class="col-md-4">
       <div class="card">
-        <img src="images/guitar.jpg" class="card-img-top" alt="Гітари" >
+        <img src="images/guitars.jpg" class="card-img-top" alt="Гітари" >
         <div class="card-body">
           <h5 class="card-title">Гітари</h5>
           <p class="card-text">Електро та акустичні гітари для новачків і професіоналів.</p>
@@ -27,7 +27,7 @@ ob_start();
     </div>
     <div class="col-md-4">
       <div class="card">
-        <img src="images/drums.jpg" class="card-img-top" alt="Барабани">
+        <img src="images/drumss.jpg" class="card-img-top" alt="Барабани">
         <div class="card-body">
           <h5 class="card-title">Ударні</h5>
           <p class="card-text">Барабанні установки, електронні та класичні моделі.</p>
@@ -37,7 +37,7 @@ ob_start();
     </div>
     <div class="col-md-4">
       <div class="card">
-        <img src="images/keyboards.jpg" class="card-img-top" alt="Клавішні">
+        <img src="images/keyboard.jpg" class="card-img-top" alt="Клавішні">
         <div class="card-body">
           <h5 class="card-title">Клавішні</h5>
           <p class="card-text">Синтезатори, піаніно та MIDI-контролери.</p>

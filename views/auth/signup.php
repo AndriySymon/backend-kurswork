@@ -1,4 +1,18 @@
+<style>
+  .form-container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    height: 100vh;            
+  }
+  form {
+    width: 100%;
+    max-width: 400px;         
+  }
+</style>
+<div class="form-container">
 <form method="post">
+        <h2>Реєстрація</h2>
     <div class="mb-3">
         <label for="first_name">Ім’я</label>
         <input type="text" name="first_name" class="form-control" required>
@@ -25,3 +39,4 @@
     </div>
     <button type="submit" class="btn btn-success">Підтвердити</button>
 </form>
+</div>

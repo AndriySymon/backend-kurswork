@@ -4,6 +4,7 @@ namespace controllers;
 
 use core\Controller;
 use core\Template;
+use models\Category;
 use core\Core;
 use models\Instruments;
 use core\DB;
@@ -18,6 +19,7 @@ class AdminInstrumentController extends Controller {
 
         $instrumentModel = new Instruments();
         $instrument = $instrumentModel->findById($id);
+        $categories = Category::getAll();
 
         if (!$instrument) {
             http_response_code(404);
@@ -47,7 +49,8 @@ class AdminInstrumentController extends Controller {
 
         return $this->render([
             'instrument' => $instrument,
-            'error' => $error
+            'error' => $error,
+            'categories' => $categories
         ], 'admin/edit');
     }
 
@@ -76,12 +79,13 @@ class AdminInstrumentController extends Controller {
 
     public function actionAdd($params = []){
         if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-        header('Location: /');
-        exit;
+            header('Location: /');
+            exit;
         }
 
         $error = null;
         $instrumentModel = new Instruments();
+        $categories = Category::getAll();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = trim($_POST['name'] ?? '');
@@ -102,7 +106,8 @@ class AdminInstrumentController extends Controller {
         }
 
         return $this->render([
-            'error' => $error
+            'error' => $error,
+            'categories' => $categories
         ], 'admin/add');
     }
 }

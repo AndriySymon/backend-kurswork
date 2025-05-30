@@ -6,6 +6,20 @@
     <title><?= htmlspecialchars($instrument['name']) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+    .page-container {
+        width: 100vw; 
+        padding: 25px 60px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.07);
+        box-sizing: border-box;
+    }
+    .reviews-container > div {
+        background-color: #f9f9f9;
+    }
+</style>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('.add-to-cart');
@@ -33,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <body>
-<div class="container mt-5">
+<div class="page-container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-4">
             <img src="/images/<?= htmlspecialchars($instrument['image']) ?>" class="img-fluid rounded shadow" alt="<?= htmlspecialchars($instrument['name']) ?>">
         </div>
         <div class="col-md-6">
@@ -84,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     </div>
 <h3 class="mt-5">Відгуки</h3>
+<div class="reviews-container mb-5">
 <?php if (!empty($reviews)): ?>
     <?php foreach ($reviews as $review): ?>
         <div class="border rounded p-3 mb-3">
@@ -96,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <?php else: ?>
     <p>Наразі немає коментарів.</p>
 <?php endif; ?>
+</div>
 <h4 class="mt-4">Залишити відгук</h4>
 <form method="post" class="mb-5">
     <div class="mb-3">

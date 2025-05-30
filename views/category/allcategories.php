@@ -6,6 +6,7 @@
     }
 
     .category-card img {
+        width: 100%;
         height: 180px;
         object-fit: cover;
     }
@@ -23,36 +24,16 @@
 </style>
 
 <div class="row justify-content-center">
-    <div class="col-md-3 category-col">
-        <div class="card category-card">
-            <img src="/images/guitar.jpg" class="card-img-top" alt="Гітари">
-            <div class="card-body">
-                <h5 class="card-title">Гітари</h5>
-                <p class="card-text">Електро та акустичні гітари для новачків і професіоналів.</p>
-                <a href="/index.php?route=category/view/1" class="btn btn-outline-primary mt-auto">Переглянути</a>
+    <?php foreach ($categories as $category): ?>
+        <div class="col-md-3 category-col mb-4">
+            <div class="card category-card h-100 d-flex flex-column">
+                <img src="/images/<?= htmlspecialchars($category['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($category['name']) ?>">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title"><?= htmlspecialchars($category['name']) ?></h5>
+                    <p class="card-text"><?= htmlspecialchars($category['short_text']) ?></p>
+                    <a href="/index.php?route=category/view/<?= urlencode($category['id']) ?>" class="btn btn-outline-primary mt-auto">Переглянути</a>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-3 category-col">
-        <div class="card category-card">
-            <img src="/images/drums.jpg" class="card-img-top" alt="Барабани">
-            <div class="card-body">
-                <h5 class="card-title">Ударні</h5>
-                <p class="card-text">Барабанні установки, електронні та класичні моделі.</p>
-                <a href="/index.php?route=category/view/2" class="btn btn-outline-primary mt-auto">Переглянути</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3 category-col">
-        <div class="card category-card">
-            <img src="/images/keyboards.jpg" class="card-img-top" alt="Клавішні">
-            <div class="card-body">
-                <h5 class="card-title">Клавішні</h5>
-                <p class="card-text">Синтезатори, піаніно та MIDI-контролери.</p>
-                <a href="/index.php?route=category/view/3" class="btn btn-outline-primary mt-auto">Переглянути</a>
-            </div>
-        </div>
-    </div>
+    <?php endforeach; ?>
 </div>

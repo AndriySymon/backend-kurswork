@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 d-flex flex-column align-items-center">
     <h2>Вхід</h2>
     <?php if (!empty($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>

@@ -1,4 +1,5 @@
-<div class="container mt-5">
+<div class="d-flex justify-content-center align-items-start" style="min-height: 80vh; padding-top: 30px;">
+  <div style="max-width: 500px; width: 100%; border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background-color: #fff;">
     <h2>Редагування акаунту</h2>
     <?php if (!empty($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -30,5 +31,5 @@
     <?php if (!empty($_SESSION['user'])): ?>
     <a href="/order/myOrders" class="btn btn-outline-primary mt-3" style="margin-left: -17px;">Мої замовлення</a>
     <?php endif; ?>
-
+    </div>
 </div>

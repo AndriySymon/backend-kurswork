@@ -1,5 +1,5 @@
 <?php
-$this->Title = 'Список інструментів';
+$this->Title = 'Весь каталог';
 
 $pdo = new PDO('mysql:host=localhost;dbname=music_shop;charset=utf8', 'root', '');
 

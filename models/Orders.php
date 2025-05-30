@@ -90,4 +90,59 @@ class Orders{
         $stmt = $this->db->prepare("UPDATE orders SET status = 'Скасовано' WHERE id = :id");
         $stmt->execute(['id' => $orderId]);
     }
+    public function getAllOrdersWithItems(){
+        $stmt = $this->db->prepare("
+        SELECT o.*, oi.product_id, oi.quantity, oi.price, i.name AS product_name
+        FROM orders o
+        LEFT JOIN order_items oi ON o.id = oi.order_id
+        LEFT JOIN instruments i ON i.id = oi.product_id
+        ORDER BY o.created_at DESC
+    ");
+    $stmt->execute();
+    $rawResults = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    $orders = [];
+    foreach ($rawResults as $row) {
+        $orderId = $row['id'];
+        if (!isset($orders[$orderId])) {
+            $orders[$orderId] = [
+                'id' => $orderId,
+                'user_id' => $row['user_id'],
+                'total_price' => $row['total_price'],
+                'address' => $row['address'],
+                'city' => $row['city'],
+                'status' => $row['status'],
+                'created_at' => $row['created_at'],
+                'items' => []
+            ];
+        }
+
+        if ($row['product_id']) {
+            $orders[$orderId]['items'][] = [
+                'product_name' => $row['product_name'],
+                'quantity' => $row['quantity'],
+                'price' => $row['price']
+            ];
+        }
+    }
+
+    return $orders;
+    }
+
+    public function updateOrder($id, $status, $address, $city, $total_price){
+        $stmt = $this->db->prepare("UPDATE orders SET status = :status, address = :address, city = :city, total_price = :total_price WHERE id = :id");
+        $stmt->execute([
+        'status' => $status,
+        'address' => $address,
+        'city' => $city,
+        'total_price' => $total_price,
+        'id' => $id
+    ]);
+    }
+    public function deleteOrder($id){
+        $stmtItems = $this->db->prepare("DELETE FROM order_items WHERE order_id = :id");
+        $stmtItems->execute(['id' => $id]);
+        $stmtOrder = $this->db->prepare("DELETE FROM orders WHERE id = :id");
+        $stmtOrder->execute(['id' => $id]);
+    }
 }
