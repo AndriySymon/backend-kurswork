@@ -1,14 +1,16 @@
 <?php
 $this->Title = 'Весь каталог';
-
-$pdo = new PDO('mysql:host=localhost;dbname=music_shop;charset=utf8', 'root', '');
-
-$stmt = $pdo->query("SELECT * FROM instruments");
-$instruments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<div class="container mb-3">
+  <label for="sortOrder" class="form-label">Сортувати за ціною:</label>
+  <select id="sortOrder" class="form-select w-auto d-inline-block">
+    <option value="all">Не сортувати</option>
+    <option value="asc">Від дешевих до дорогих</option>
+    <option value="desc">Від дорогих до дешевих</option>
+  </select>
+</div>
 <div class="container">
-  <div class="row">
+  <div class="row" id ="products-container">
     <?php foreach ($instruments as $instrument): ?>
       <div class="col-md-4 mb-4">
         <div class="card" style="width: 18rem;">
@@ -32,3 +34,36 @@ $instruments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
   </div>
 </div>
+<script>
+document.getElementById('sortOrder').addEventListener('change', function () {
+  const order = this.value;
+
+
+  fetch(`/instruments/sort?order=${order}`)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('products-container');
+      container.innerHTML = '';
+      if (order === 'asc'){
+        data.sort((a,b) => parseFloat(a.price) - parseFloat(b.price));
+      } else if (order === 'desc'){
+        data.sort((a,b) => parseFloat(b.price) - parseFloat(a.price));
+      }
+      data.forEach(instr => {
+        container.innerHTML += `
+          <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem;">
+              <img src="/images/${instr.image}" class="card-img-top" alt="${instr.name}">
+              <div class="card-body">
+                <h5 class="card-title">${instr.name}</h5>
+                <p class="card-text">${instr.short_text}</p>
+                <h5 class="mt-4">Ціна</h5>
+                <p class="fs-4 fw-bold text-success">${parseFloat(instr.price).toFixed(2)} грн</p>
+                <a href="/instruments/view/${instr.id}" class="btn btn-primary">Детальніше</a>
+              </div>
+            </div>
+          </div>`;
+      });
+    });
+});
+</script>

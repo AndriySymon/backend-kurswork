@@ -14,7 +14,10 @@ if (isset($_GET['route']))
 else
     $route = '';
 
-
+try{
 $core = \core\Core::get();
 $core->run($route);
 $core->done();
+}catch (Throwable $e){
+    \core\Core::get()->router->error(500);
+}

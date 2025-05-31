@@ -38,5 +38,8 @@
     <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
     </div>
     <button type="submit" class="btn btn-success">Підтвердити</button>
+    <div class="alert alert-warning mt-2">
+      Маєте акаунт? <a href="/auth/login">Увійти</a> в акаунт.
+    </div>
 </form>
 </div>

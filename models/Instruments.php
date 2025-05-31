@@ -59,4 +59,26 @@ class Instruments{
         $stmt = $this->db->prepare("INSERT INTO instruments (name, text, short_text, image, category_id, price) VALUES (?, ?, ?, ?, ?, ?)");
         return $stmt->execute([$name, $text, $short_text, $image, $category_id, $price]);
     }
+
+    public static function getAll(){
+        $db = DB::getConnection();
+        $stmt = $db->query("SELECT * FROM instruments");
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public static function getAllSorted($order = ''){
+        $db = DB::getConnection();
+
+        $order = strtolower($order);
+        if ($order === 'desc') {
+        $sql = "SELECT * FROM instruments ORDER BY price DESC";
+        } else if ($order === 'asc') {
+            $sql = "SELECT * FROM instruments ORDER BY price ASC";
+        } else {
+            $sql = "SELECT * FROM instruments";
+        }
+
+        $stmt = $db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

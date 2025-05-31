@@ -1,7 +1,7 @@
 <?php
 if (!isset($Content)) {
     header("HTTP/1.0 404 Not Found");
-    exit("404 - Сторінка не знайдена");
+    exit("404 - Контент не знайдено");
 }
 /**@var string $Title */
 /**@var string $Content */
@@ -28,7 +28,7 @@ if (empty($Title))
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> 
                             <li><a href="/" class="nav-link px-2 text-secondary">Головна</a></li> 
                             <li><a href="/index.php?route=category/allcategories" class="nav-link px-2 text-white">Категорії</a></li> 
-                            <li><a href="/instruments/index" class="nav-link px-2 text-white">Весь каталог</a></li> 
+                            <li><a href="/instruments/index" class="nav-link px-2 text-white">Каталог</a></li> 
                             <li><a href="/site/about" class="nav-link px-2 text-white">Про нас</a></li> 
                         </ul> 
                         <div class="text-end"> 

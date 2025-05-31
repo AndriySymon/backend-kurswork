@@ -13,5 +13,8 @@
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Увійти</button>
+        <div class="alert alert-warning mt-2">
+            Не маєте акаунту? <a href="/auth/signup">Зареєструватись</a>
+        </div>
     </form>
 </div>

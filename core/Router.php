@@ -36,6 +36,15 @@ class Router
         }
         public function error($code){
             http_response_code($code);
-            echo $code;
+            ob_start();
+                $viewPath = "views/errors/{$code}.php";
+                if (file_exists($viewPath)){
+                    include $viewPath;
+                } else {
+                    echo $code . "Error";
+                }
+
+            $content = ob_get_clean();
+            echo $content;
         }
     }
