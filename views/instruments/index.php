@@ -37,7 +37,7 @@ $this->Title = 'Весь каталог';
 <script>
 document.getElementById('sortOrder').addEventListener('change', function () {
   const order = this.value;
-
+  const USER_ROLE = <?= json_encode($_SESSION['user']['role'] ?? 'user') ?>
 
   fetch(`/instruments/sort?order=${order}`)
     .then(res => res.json())
@@ -50,7 +50,7 @@ document.getElementById('sortOrder').addEventListener('change', function () {
         data.sort((a,b) => parseFloat(b.price) - parseFloat(a.price));
       }
       data.forEach(instr => {
-        container.innerHTML += `
+        let html = `
           <div class="col-md-4 mb-4">
             <div class="card" style="width: 18rem;">
               <img src="/images/${instr.image}" class="card-img-top" alt="${instr.name}">
@@ -59,10 +59,20 @@ document.getElementById('sortOrder').addEventListener('change', function () {
                 <p class="card-text">${instr.short_text}</p>
                 <h5 class="mt-4">Ціна</h5>
                 <p class="fs-4 fw-bold text-success">${parseFloat(instr.price).toFixed(2)} грн</p>
-                <a href="/instruments/view/${instr.id}" class="btn btn-primary">Детальніше</a>
+                <a href="/instruments/view/${instr.id}" class="btn btn-primary">Детальніше</a>`;
+        
+          if (USER_ROLE === 'admin') {
+          html += `
+                <div class="d-flex gap-2 mt-2">
+                  <a href="/admininstrument/edit/${instr.id}" class="btn btn-warning btn-sm">Редагувати</a>
+                  <a href="/admininstrument/delete/${instr.id}" class="btn btn-danger btn-sm" onclick="return confirm('Ви впевнені, що хочете видалити цей інструмент?')">Видалити</a>
+                </div>`;
+        } 
+        html += `
               </div>
             </div>
           </div>`;
+          container.innerHTML += html;
       });
     });
 });
