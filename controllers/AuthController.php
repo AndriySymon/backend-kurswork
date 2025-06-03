@@ -16,16 +16,16 @@ class AuthController extends Controller {
         $passwordConfirm = $_POST['password_confirm'] ?? '';
 
         if (empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password) || empty($passwordConfirm)) {
-            $error = "Будь ласка, заповніть усі поля.";
+            $_SESSION['flash'] = "Будь ласка, заповніть усі поля.";
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = "Некоректна електронна пошта.";
+            $_SESSION['flash'] = "Некоректна електронна пошта.";
         } elseif (strlen($password) < 6) {
-            $error = "Пароль має містити щонайменше 6 символів.";
+            $_SESSION['flash'] = "Пароль має містити щонайменше 6 символів.";
         } elseif ($password !== $passwordConfirm) {
-            $error = "Паролі не співпадають.";
+            $_SESSION['flash'] = "Паролі не співпадають.";
         }
 
-        if (!$error) {
+        if (!isset($_SESSION['flash'])) {
             $db = DB::getConnection();
             $userModel = new \models\User();
 
@@ -41,7 +41,9 @@ class AuthController extends Controller {
                 exit;
 
             } catch (\PDOException $e) {
-                $error = "Користувач з такою поштою вже існує.";
+                $_SESSION['flash'] = "Користувач з такою поштою вже існує.";
+                header('Location: /auth/signup');
+                exit;
             }
         }
     }

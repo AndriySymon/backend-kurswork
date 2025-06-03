@@ -1,12 +1,27 @@
+<style>
+.card-img-top {
+  object-fit: cover;
+  height: 300px;
+}
+.card-text {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-body .btn,
+.card-body .d-flex {
+  margin-top: auto;
+}
+</style>
 <?php ob_start(); ?>
 <div class="container mt-4">
     <h2>Інструменти категорії: <?= htmlspecialchars($categoryName) ?></h2>
     <div class="row mt-3">
         <?php foreach ($instruments as $instrument): ?>
             <div class="col-md-4 mb-4">
-                <div class="card">
+                <div class="card h-100 d-flex flex-column">
                     <img src="/images/<?= $instrument['image'] ?>" class="card-img-top" alt="<?= $instrument['name'] ?>">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?= htmlspecialchars($instrument['name']) ?></h5>
                         <p class="card-text"><?= htmlspecialchars($instrument['short_text']) ?></p>
                         <h5 class="mt-4">Ціна</h4>

@@ -12,6 +12,12 @@
 </style>
 <div class="form-container">
 <form method="post">
+  <?php if (!empty($_SESSION['flash'])): ?>
+    <div class="alert alert-danger">
+      <?= htmlspecialchars($_SESSION['flash']) ?>
+  </div>
+  <?php unset($_SESSION['flash']); ?>
+  <?php endif; ?>
         <h2>Реєстрація</h2>
     <div class="mb-3">
         <label for="first_name">Ім’я</label>

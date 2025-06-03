@@ -17,6 +17,12 @@
 <h2>Редагувати категорію</h2>
 
 <form method="post" enctype="multipart/form-data">
+    <?php if (!empty($_SESSION['flash'])): ?>
+    <div style="color: red; padding: 10px; font-weight: bold;">
+        <?= $_SESSION['flash'] ?>
+    </div>
+    <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
     <div class="mb-3">
         <label for="name" class="form-label">Назва</label>
         <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($category['name']) ?>" required>

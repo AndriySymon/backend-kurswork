@@ -29,27 +29,20 @@ class AdminCategoryController extends Controller{
         $id = $params[0];
         $error = null;
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $name = $_POST['name'];
-            $short_text = $_POST['short_text'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $short_text = $_POST['short_text'];
+    $image = $_POST['image'];
 
-            $category = Category::getById($id);
-            $image = $_POST['image'];
-
-            if (!empty($image) && !file_exists('images/' . $image)) {
-                $error = "Файл зображення '{$image}' не знайдено у папці images.";
-            }
-
-            if (!$error) {
-                Category::update($id, $name, $short_text, $image);
-                header('Location: /admincategory/index');
-                exit;
-            }
-
-            Category::update($id, $name, $short_text, $image);
-            header('Location: /admincategory/index');
-            exit;
-        }
+    if (!empty($image) && !file_exists('images/' . $image)) {
+        $_SESSION['flash'] = "Файл зображення '{$image}' не знайдено у папці images.";
+    } else {
+        Category::update($id, $name, $short_text, $image);
+        $_SESSION['flash'] = "Категорію успішно оновлено.";
+        header('Location: /admincategory/index');
+        exit;
+    }
+}
         $category = Category::getById($id);
 
         $view = new Template('views/admin/editcategories.php', [
@@ -81,11 +74,10 @@ class AdminCategoryController extends Controller{
         $image = $_POST['image'];
 
         if (!file_exists('images/' . $image)) {
-            $error = "Файл зображення '$image' не знайдено у папці images.";
-        }
-
-        if (!$error) {
+            $_SESSION['flash'] = "Файл зображення '$image' не знайдено у папці images.";
+        }else {
             Category::add($name, $short_text, $image);
+            $_SESSION['flash'] = "Категорію успішно додано.";
             header('Location: /admincategory/index');
             exit;
         }

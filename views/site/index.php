@@ -40,7 +40,7 @@ ob_start();
         <img src="images/keyboard.jpg" class="card-img-top" alt="Клавішні">
         <div class="card-body">
           <h5 class="card-title">Клавішні</h5>
-          <p class="card-text">Синтезатори, піаніно та MIDI-контролери.</p>
+          <p class="card-text">Синтезатори, піаніно, MIDI-контролери та цифрові піаніно</p>
           <a href="/index.php?route=category/view/3" class="btn btn-outline-primary">Переглянути</a>
         </div>
       </div>

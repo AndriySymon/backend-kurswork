@@ -1,3 +1,28 @@
+<style>
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.card-img-top {
+  object-fit: cover;
+  height: 300px;
+}
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card-text {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card .btn-primary,
+.card .d-flex {
+  margin-top: auto;
+}
+</style>
 <?php
 $this->Title = 'Весь каталог';
 ?>
@@ -13,7 +38,7 @@ $this->Title = 'Весь каталог';
   <div class="row" id ="products-container">
     <?php foreach ($instruments as $instrument): ?>
       <div class="col-md-4 mb-4">
-        <div class="card" style="width: 18rem;">
+        <div class="card h-100">
           <img src="../../images/<?= htmlspecialchars($instrument['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($instrument['name']) ?>">
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($instrument['name']) ?></h5>
