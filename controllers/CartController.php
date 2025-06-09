@@ -82,6 +82,9 @@ class CartController extends Controller{
         return $total;
     }
     public function actionCheckout(){
+        if (empty($_SESSION['cart'])) {
+            $this->redirect('/cart');
+        }
         $cartItems = [];
 
         if(!empty($_SESSION['cart'])){
