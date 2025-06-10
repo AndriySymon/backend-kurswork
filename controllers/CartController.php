@@ -86,6 +86,7 @@ class CartController extends Controller{
             $this->redirect('/cart');
         }
         $cartItems = [];
+        $missingItems = [];
 
         if(!empty($_SESSION['cart'])){
             $instrumentModel = new \models\Instruments();
@@ -94,8 +95,18 @@ class CartController extends Controller{
                 if ($instrument){
                     $instrument['quantity'] = $quantity;
                     $cartItems[] = $instrument;
+                } else {
+                    $missingItems[] = $id;
+                    unset($_SESSION['cart'][$id]);
                 }
             }
+        }
+        if (!empty($missingItems)) {
+            return $this->render([
+                'items' => $cartItems,
+                'missing' => true,
+                'message' => 'Деякі товари були видалені або недоступні. Вони були прибрані з вашого кошика.'
+            ]);
         }
         return $this->render(['items' => $cartItems]);
     }

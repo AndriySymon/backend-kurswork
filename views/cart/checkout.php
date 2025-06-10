@@ -11,7 +11,11 @@
 </style>
 <div class="order-form-container">
 <h1>Оформлення замовлення</h1>
-
+<?php if (!empty($message)): ?>
+    <div class="alert alert-warning text-center">
+        <?= htmlspecialchars($message) ?>
+    </div>
+<?php endif; ?>
 <form method="post" action="/cart/submitorder">
     <div class="mb-3">
         <label>Ім’я:</label>
